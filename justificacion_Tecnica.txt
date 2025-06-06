@@ -1,0 +1,16 @@
+Para construir un sistema robusto, mantenible y escalable, se implementaron tres patrones de diseño clave, cada uno resolviendo un problema específico dentro de la arquitectura de la aplicación. 
+
+Patron singleton:
+
+Problema: La conexión a una base de datos es una operación costosa en términos de recursos (memoria, tiempo de procesamiento, límites de conexión del servidor). Instanciar una nueva conexión para cada consulta es ineficiente y puede agotar los recursos del sistema y de la base de datos.
+Solución y Justificación Técnica: El patrón Singleton se aplicó a la clase DatabaseConnector para garantizar que exista una y solo una instancia de esta clase durante todo el ciclo de vida de la aplicación. Esto proporciona un punto de acceso global y controlado al motor de la base de datos y al pool de conexiones. Al reutilizar una única instancia, se optimiza el rendimiento, se reduce la latencia de las consultas y se gestionan los recursos de manera eficiente, evitando la sobrecarga del servidor de base de datos.
+
+
+Patrón Factory (ModelFactory)
+Problema: La aplicación necesita crear objetos de modelo (ej. Customer, Product) a partir de datos crudos (ej. filas de un DataFrame). Esparcir la lógica de instanciación Customer(...) o Product(...) por toda la aplicación acopla fuertemente el código cliente a la implementación específica de cada clase.
+Solución y Justificación Técnica: El patrón Factory se utilizó para encapsular y centralizar la lógica de creación de objetos. La clase ModelFactory expone métodos como create_customer() que reciben datos y devuelven un objeto del modelo correspondiente. Esto desacopla el resto de la aplicación de los detalles de construcción de los objetos. Si en el futuro la firma del constructor de Product cambia, solo es necesario modificar el método create_product en la fábrica, en lugar de buscar y cambiar cada lugar donde se instancia un producto. Esto aumenta la mantenibilidad y flexibilidad del sistema.
+
+
+Patrón Builder (SalesQueryBuilder)
+Problema: La construcción de consultas SQL con múltiples filtros opcionales puede volverse compleja y propensa a errores mediante la concatenación de strings. Además, la inserción directa de valores en la consulta la hace vulnerable a ataques de inyección SQL.
+Solución y Justificación Técnica: El patrón Builder se implementó para permitir la construcción de un objeto complejo (una consulta SQL) paso a paso. La clase SalesQueryBuilder ofrece una interfaz fluida y legible (.with_customer().with_min_quantity()) que simplifica la creación de consultas dinámicas.  Fundamentalmente, este diseño separa la lógica de construcción de la representación final de la consulta. Al manejar los valores de los filtros como parámetros separados, se aprovecha la capacidad de SQLAlchemy para realizar consultas parametrizadas, mitigando por completo el riesgo de inyección SQL y mejorando drásticamente la seguridad del sistema
