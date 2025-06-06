@@ -83,49 +83,49 @@ SET GLOBAL local_infile = 1;
 SHOW GLOBAL VARIABLES LIKE 'local_infile';
 -- cargar datos desde los .csv
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\countries.csv'
+LOAD DATA LOCAL INFILE 'data/countries.csv'
 INTO TABLE countries
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\categories.csv'
+LOAD DATA LOCAL INFILE 'data/categories.csv'
 INTO TABLE categories
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\cities.csv'
+LOAD DATA LOCAL INFILE 'data/cities.csv'
 INTO TABLE cities
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\customers.csv'
+LOAD DATA LOCAL INFILE 'data/customers.csv'
 INTO TABLE customers
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\employees.csv'
+LOAD DATA LOCAL INFILE 'data/employees.csv'
 INTO TABLE employees
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\products.csv'
+LOAD DATA LOCAL INFILE 'data/products.csv'
 INTO TABLE products
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'C:\Users\juanx\Desktop\proyectoFinal\data\sales.csv'
+LOAD DATA LOCAL INFILE 'data/sales.csv'
 INTO TABLE sales
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
