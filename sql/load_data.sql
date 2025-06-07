@@ -1,4 +1,7 @@
-CREATE DATABASE IF NOT EXISTS salesdatabase DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+-- Activar local_infile
+SET GLOBAL local_infile = 1;
+
+CREATE DATABASE IF NOT EXISTS salesdatabase;
 USE salesdatabase;
 
 -- crear tablas
@@ -78,54 +81,52 @@ CREATE TABLE IF NOT EXISTS sales (
     FOREIGN KEY (ProductID) REFERENCES products(ProductID)
 );
 
--- activar la propiedad local infile para cargar archivos
-SET GLOBAL local_infile = 1;
-SHOW GLOBAL VARIABLES LIKE 'local_infile';
+
 -- cargar datos desde los .csv
 
-LOAD DATA LOCAL INFILE 'data/countries.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/countries.csv'
 INTO TABLE countries
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/categories.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/categories.csv'
 INTO TABLE categories
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/cities.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/cities.csv'
 INTO TABLE cities
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/customers.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/customers.csv'
 INTO TABLE customers
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/employees.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/employees.csv'
 INTO TABLE employees
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/products.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/products.csv'
 INTO TABLE products
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES;
 
-LOAD DATA LOCAL INFILE 'data/sales.csv'
+LOAD DATA LOCAL INFILE 'C:/Users/juanx/Desktop/accenture/AccentureData/data/sales.csv'
 INTO TABLE sales
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'

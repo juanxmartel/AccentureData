@@ -12,16 +12,19 @@ class DatabaseConnector:
 
     def __new__(cls):
         if cls._instance is None:
-            print("Creando nueva instancia de DatabaseConnector...")
             cls._instance = super().__new__(cls)
             try:
                 # Inicializamos el motor y la sesión en la CLASE
-                cls._engine = create_engine(DATABASE_URL, echo=False)
+                cls._engine = create_engine(
+                    DATABASE_URL,
+                    echo=False,
+                    connect_args={'consume_results': True}
+                )
                 cls._Session = scoped_session(
                     sessionmaker(bind=cls._engine)
                 )
             except Exception as e:
-                print(f"Error al conectar a la base de datos: {e}")
+
                 raise RuntimeError(f"Error al conectar a la base de datos: {str(e)}")
         return cls._instance
 
@@ -34,7 +37,6 @@ class DatabaseConnector:
         if self._Session:
             return self._Session()
         else:
-            print("Error: no está inicializada.")
             return None
 
     def run_query(self, query: str, params: dict = None) -> pd.DataFrame:
@@ -46,11 +48,31 @@ class DatabaseConnector:
             return pd.DataFrame()
 
         try:
-            result = session.execute(text(query), params) 
+            result = session.execute(text(query), params)
             df = pd.DataFrame(result.fetchall(), columns=result.keys())
             return df
         except SQLAlchemyError as e:
-            print(f"Error al ejecutar la consulta: {e}")
             return pd.DataFrame()
         finally:
             session.close()
+
+    def call_stored_procedure(self, procedure_name: str, params: dict = None):
+        """
+        Llama a un procedimiento almacenado de forma segura y retorna los resultados como DataFrame.
+        """
+        sql_query = f"CALL {procedure_name}({','.join([':' + k for k in params.keys()]) if params else ''})"
+
+        try:
+            with self._engine.connect() as connection:
+                
+                cursor_result = connection.execute(text(sql_query), params if params else {})
+
+                if cursor_result.returns_rows:
+
+                    df = pd.DataFrame(cursor_result.fetchall(), columns=cursor_result.keys())
+                    return df
+                else:
+                    return pd.DataFrame()
+
+        except Exception as e:
+            return pd.DataFrame() 
