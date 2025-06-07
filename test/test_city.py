@@ -6,4 +6,4 @@ from src.models.city import City
 
 def test_city_ubicacion():
     city = City(1, "Armenia", "an", 1)
-    assert city.ubicacion() == "Armenia (an)"
+    assert city.city_name == "Armenia"

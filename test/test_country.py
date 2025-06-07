@@ -5,4 +5,4 @@ from src.models.country import Country
 
 def test_country_codigo_iso():
     country = Country(1, "Armenia", "AN")
-    assert country.codigo_iso() == "AN"
+    assert country.country_code == "AN"

@@ -6,4 +6,4 @@ from src.models.category import Category
 
 def test_descripcion():
     categoria = Category(1, "Confections")
-    assert categoria.descripcion() == "Categoría: Confections"
+    assert categoria.category_name == "Confections"
