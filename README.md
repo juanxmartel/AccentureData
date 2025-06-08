@@ -27,6 +27,7 @@
 Se implementaron pruebas unitarias para verificar la integridad del codigo, se pueden ver en la carpeta test
 
 # Estructura del proyecto
+```
 
 ├── data/                 # Contiene los archivos CSV originales.
 ├── sql/                  # Scripts SQL para creación y carga de 
@@ -46,6 +47,7 @@ Se implementaron pruebas unitarias para verificar la integridad del codigo, se p
 ├── main.py               # Script principal 
 ├── notebook.ipynb        # jupiter notebook
 └── requirements.txt      # Dependencias de Python.
+```
 
 ##  Configuración e Instalación
 
